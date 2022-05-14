@@ -1,0 +1,56 @@
+\titledquestion{$p$-stable distributions}
+We say that a distribution $\mathcal{D}$ is $p$-stable if there exists a $p\geq 0$ such that for any $n$ real numbers $b_1,\ldots,b_n$ and i.i.d. random variables $X_1,\ldots,X_n$ with distribution $\mathcal{D}$, the r.v. $\sum_i b_i X_i$ has the same distribution as the r.v. $(\sum_i|b_i|^p)^{1/p}X$, where $X\sim\mathcal{D}$.
+\begin{parts}
+    \part[4] Show that the Cauchy distribution is 1-stable.
+    \part[5] Show that the Gaussian distribution is 2-stable.
+    \part[6] Let $X$ have the following pdf: $$f_X(x)=\sqrt{\frac{\sigma}{2\pi}}\frac{1}{(x-\mu)^{3/2}}\exp\left(-\frac{\sigma}{2(x-\mu)}\right),$$ for $\mu<x$ where $\mu$ is $X$'s mean and $\sigma$, its standard deviation. We say that $X$ follows a Lévy distribution. Show that $X$ is $1/2$-stable.
+\end{parts}
+\newpage
+
+\titledquestion{A Basel problem related distribution}
+Consider the following distribution on integers $x\geq 1$: ${\bf Prob}(X=x)=(6/\pi^2)x^{-2}$.
+\begin{parts}
+    \part[4] Show that it is indeed a valid distribution.
+    \part[8] Compute $E[X]$ and $Var(X)$.
+\end{parts}
+\newpage
+
+% https://arxiv.org/pdf/1910.04236.pdf
+\titledquestion{Shannon type inequalities}
+In this problem, we investigate fundamental inequalities that arise in information theory.
+\begin{parts}
+    \part[4] Show that for any three random variables $X_1$, $X_2$, $X_3$, $$H(X_1,X_2)+H(X_1,X_3)\geq H(X_1,X_2,X_3)+H(X_1)$$
+    \part[4] Using (a), Deduce that $$I(X_1;X_2)+I(X_1;X_3)-I(X_2;X_3)\leq H(X_1)$$
+    \part[4] Suppose now the r.v.'s $X_1$---$X_2$---$X_3$ form a Markov chain. Prove that $$I(X_1;X_2)\geq I(X_1;X_3).$$ This result is known as the \textit{Data processing inequality}.
+    \part[5] Suppose we now add another random variable $X_4$ to the chain. Show that $$I(X_1;X_4)+I(X_2;X_3)\geq I(X_1;X_3)+I(X_2;X_4)$$
+\end{parts}
+\newpage
+
+\titledquestion{Generating a chi-squared distribution}
+Let $Z_1,\ldots,Z_n$ be i.i.d. $\sim\mathcal{N}(0,1)$ and define $X=Z_1^2+\ldots+Z_n^2$. We say that a random variable follows a $\chi^2$ distribution with $k$ degrees of freedom if its density function is given by $$f_X(x)=\frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)},$$ where $\Gamma(k)=\int_0^\infty e^{-x}x^{k-1}\,dx$ is the Gamma function.
+\begin{parts}
+    \part[2] Show that $\Gamma(1/2)=\sqrt{\pi}$. \textit{Hint: recall that $\int_\mathbb{R}e^{-x^2}\,dx=\sqrt{\pi}$}.
+    \part[3] Using (a), show that $\Gamma(3/2)=\sqrt{\pi}/2$. \textit{Hint: $\Gamma(k+1)=k\Gamma(k)$}.
+    \part[5] Generalise your previous results to show that $$\Gamma(n/2)=\frac{(n-2)!!}{2^{(n-1)/2}}\sqrt{\pi}.$$\textit{Hint: use induction}.
+    \part[8] Compute the pdf of $Z_1^2$ and its characteristic function $\Phi_{Z_1^2}(\omega)$.
+    \part[2] Deduce using (a) that $Z_1^2$ is $\chi^2(1)$ distributed.
+    \part[6] Show that $Z_1^2+Z_2^2\sim\chi^2(2)$.\textit{Hint: use polar coordinates}.
+    \part[6] Compute the value of $\Phi_X(\omega)$. Conclude that $X\sim\chi^2(n)$.
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage (this page is intentionally left blank)
+\newpage
+% https://math.stackexchange.com/questions/1110168/proof-of-the-box-muller-method?rq=1
+\titledquestion{Box-Muller method}
+This problem addresses a method of converting two independent uniform random variables to two independent Gaussian random variables. Let $X_1(u)$ and $X_2(u)$ be two independent uniformly distributed random variables such that $$f_{X_1(u)}(z)=f_{X_2(u)}(z).=\begin{cases}1&\text{ if $z\in[0,1]$}\\0&\text{ otherwise.}\end{cases}$$ 
+Let $Y_1(u)=\sqrt{-2\ln(X_1(u))}\cos(2\pi X_2(u))$, and $Y_2(u):=\sqrt{-2\ln(X_1(u))}\sin(2\pi X_2(u))$. The purpose of this problem is to demonstrate that the r.v.'s defined above are independent zero mean and unit variance Gaussians.
+\begin{parts}
+    \part[4] Compute $f_{X_1(u)X_2(u)}(x_1,x_2)$.
+    \part[4] Compute $E[Y_1(u)]$, $E[Y_2(u)]$ and $E[Y_1(u)Y_2(u)]$.
+    \part[4] Let $R(u)=\sqrt{-2\ln(X_1(u))}$. Show that $$f_{R(u)}(r)=re^{-r^2/2},$$ where $r>0$.
+    \part[4] Now, let $\Theta(u):=2\pi X_2(u)$. Compute $f_{\Theta(u)}(\theta)$ and deduce the value of the joint density $f_{R(u),\Theta(u)}(r,\theta)$.
+    \part[8] Finally, using polar coordinates, show that $Y_1(u),Y_2(u)\sim\mathcal{N}(0,1)$ and conclude that they are indeed independent.
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage
+
