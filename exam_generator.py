@@ -21,8 +21,7 @@ EXAMS_FOLDER = 'Exams/'
 QT_FORMAT_REGEX = '% QUESTION \d+\n' # question separator
 PT_FORMAT_REGEX = '\[\d+\]' # any number in brackets (to recover question points)
 
-NB_Q_MIN_MT, NB_Q_MIN_F = 4, 5 # minimum and maximum number of questions on a midterm exam
-NB_Q_MAX_MT, NB_Q_MAX_F = 5, 6 # minimum and maximum number of questions on a final exam
+NB_Q_MIN_MT, NB_Q_MIN_F = 3, 4 # minimum number of questions on a midterm and final exams
 TOTAL_EXAM_PTS = 100
 
 
@@ -34,12 +33,15 @@ def generate_exam_id() -> str:
 
 def random_subset_sum(points, total, subset_size) -> list:
     """Returns a random possible combination of points that sum to total.
-    @param points => """
+    @param points      => list of questions points
+    @param total       => target number of points
+    @param subset_size => # of questions to choose from"""
     random.shuffle(points)
-    for subset in combinations(points, subset_size):
-        if sum(subset) == total:
-            return list(subset)
-    print('Error in point combination.')
+    while (subset_size <= 6):
+        for subset in combinations(points, subset_size):
+            if sum(subset) == total:
+                return list(subset)
+        subset_size += 1
     return None
 
 
@@ -69,17 +71,16 @@ def add_question_points(questions) -> list:
     return [list(questions.values())[i][1] for i in range(len(questions))]
 
 
-def construct_random_exam(filename, questions, is_midterm) -> str:
+def construct_random_exam(filename, questions, exam_id) -> str:
     """Write the selected questions in a LaTeX file.
     @param filename   => name of the file to save the questions into
     @param questions  => list of questions to write to the file
-    @param is_midterm => boolean to indicate whether or not the exam in questions is a midterm"""
+    @param exam_id => exam is either a midterm or a final"""
     #random.shuffle(questions)
-    exam_name = 'midterm-' if is_midterm else 'final-'
     with open(filename, 'w') as f:
         for q in questions:
             f.write(q + '\n')
-    return exam_name + generate_exam_id() + '.tex'
+    return exam_id + '-' + generate_exam_id() + '.tex'
 
 
 def compile_and_clean(exam_filename, template):
@@ -96,7 +97,7 @@ def compile_and_clean(exam_filename, template):
 
 
 def get_final_questions(questions, points) -> list:
-    """Get a list of questions the values of which are in the points array.
+    """Get a list of questions the point values of which are in the points array.
     @param questions => the entire list of questions
     @param points    => the array of corresponding points"""
     qs = []
@@ -109,38 +110,54 @@ def get_final_questions(questions, points) -> list:
     return qs
 
 
-def generate_random_exam(is_midterm) -> None:
+def generate_random_exam(is_midterm, nb_q, nb_qm=0) -> None:
     """Procedure called to generate an exam. 
-    @param is_midterm => boolean to indicate whether or not the exam in questions is a midterm"""
-    nb_q_mid, nb_q_fin = random.choice([NB_Q_MIN_MT,NB_Q_MAX_MT]), random.choice([NB_Q_MIN_F,NB_Q_MAX_F])
+    @param is_midterm => boolean to indicate whether or not the exam is a midterm
+    @param nb_q       => total number of questions to write
+    @param nb_qm      => number of questions from first part in a final exam, default value 0"""
     if is_midterm:
         exam_id = 'midterm'
-        nb_q = nb_q_mid
         exam_points = TOTAL_EXAM_PTS
     else:
         exam_id = 'final'
-        nb_q = nb_q_fin-nb_q_mid
-        exam_points = 0 if nb_q == 0 else random.choice([_ for _ in range(nb_q*10, nb_q*15+1)])
+        nb_qf = nb_q
+        nb_q = nb_qm
+        exam_points = random.choice([_ for _ in range(nb_q*10, nb_q*20+1)])
 
+    questions = []
+    # Normal procedure for midterm exam generation
     if nb_q > 0:
         mid_questions = get_question_collection(ASSETS_FOLDER + 'midterm-questions.tex')
         rand_pts = random_subset_sum(add_question_points(mid_questions), exam_points, nb_q)
-        questions = get_final_questions(mid_questions, rand_pts)
+        questions += get_final_questions(mid_questions, rand_pts)
 
+    # Supplementary procedure for final exam generation
     if not is_midterm:
         fin_questions = get_question_collection(ASSETS_FOLDER + 'final-questions.tex')
-        
-        rand_pts_f = random_subset_sum(add_question_points(fin_questions), TOTAL_EXAM_PTS-exam_points, nb_q_mid)
+        rand_pts_f = random_subset_sum(add_question_points(fin_questions), TOTAL_EXAM_PTS-exam_points, nb_qf-nb_qm)
         questions += get_final_questions(fin_questions, rand_pts_f)
-        nb_q += nb_q_mid
-    
-    exam_filename = construct_random_exam(EXAMS_FOLDER + 'test.tex', questions, is_midterm)
-    compile_and_clean(exam_filename, exam_id + '-template_' + str(nb_q) + '.tex')
+
+    exam_filename = construct_random_exam(EXAMS_FOLDER + 'test.tex', questions, exam_id)
+    compile_and_clean(exam_filename, exam_id + '-template_' + str(len(questions)) + '.tex')
     return
 
 
 if __name__ == '__main__':
-    assert(sys.argv[1] != None)
-
-    is_midterm = True if sys.argv[1] == 'midterm' else False
-    generate_random_exam(is_midterm)
+    """Main program usage
+    arg count = 3
+    argv[1]            => midterm or final
+    argv[2]            => # of questions
+    argv[3] (optional) => # of mid questions for final exam
+    """
+    assert(sys.argv[1] != None and sys.argv[2] != None)
+    
+    nb_q = int(sys.argv[2])
+    try:
+        if sys.argv[1] == 'midterm':
+            generate_random_exam(True, nb_q)
+        else:
+            nb_qm = int(sys.argv[3])
+            generate_random_exam(False, nb_q, nb_qm)
+    except (TypeError, ValueError):
+        print('Problem with arguments, exiting...')
+        exit()

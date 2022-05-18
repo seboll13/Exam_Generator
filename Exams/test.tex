@@ -1,56 +1,82 @@
-\titledquestion{$p$-stable distributions}
-We say that a distribution $\mathcal{D}$ is $p$-stable if there exists a $p\geq 0$ such that for any $n$ real numbers $b_1,\ldots,b_n$ and i.i.d. random variables $X_1,\ldots,X_n$ with distribution $\mathcal{D}$, the r.v. $\sum_i b_i X_i$ has the same distribution as the r.v. $(\sum_i|b_i|^p)^{1/p}X$, where $X\sim\mathcal{D}$.
+% https://math.la.asu.edu/~jtaylor/teaching/Fall2010/STP421/lectures/lecture20.pdf
+\titledquestion{Sums of independent random variables}
+Recall that if $f,g:\mathbb{R}\to\mathbb{R}$ are two integrable real-valued functions, then their convolution is the real-valued function $f*g:\mathbb{R}\to\mathbb{R}$ defined as 
+\begin{flalign*}
+    (f*g)(z)&=\int_{-\infty}^{+\infty}f(x)g(z-x)\,dx
+\end{flalign*}
 \begin{parts}
-    \part[4] Show that the Cauchy distribution is 1-stable.
-    \part[5] Show that the Gaussian distribution is 2-stable.
-    \part[6] Let $X$ have the following pdf: $$f_X(x)=\sqrt{\frac{\sigma}{2\pi}}\frac{1}{(x-\mu)^{3/2}}\exp\left(-\frac{\sigma}{2(x-\mu)}\right),$$ for $\mu<x$ where $\mu$ is $X$'s mean and $\sigma$, its standard deviation. We say that $X$ follows a Lévy distribution. Show that $X$ is $1/2$-stable.
+    \part[3] Show that $(f*g)(z)=(g*f)(z)$.
+    \part[4] Show that $(f*(g*h))(z)=((f*g)*h)(z)$.
+    \part[5] Let $X,Y$ be i.i.d. $\sim\mathcal{U}(0,1)$. Show that the density of $X+Y$ is given by 
+    $$p_{X+Y}=\begin{cases}
+        z&\text{ if $0\leq z\leq 1$}\\
+        2-z&\text{ if $1<z\leq 2$}\\
+        0&\text{ otherwise}.
+    \end{cases}$$
+    \part[5] Suppose now we have a sequence $X_1,\ldots,X_n$ of $n$ zero-mean Gaussian random variables where $X_i$ has variance $\sigma_i^2$ for every $i\in[n]$ and let $Z=X_1+\ldots+X_n$ be their sum. Show that $Z\sim\mathcal{N}(0,\sigma^2)$ where $\sigma^2=\sum_{i\in[n]}\sigma_i^2$.
 \end{parts}
+\newpage (this page is intentionally left blank)
 \newpage
 
-\titledquestion{A Basel problem related distribution}
-Consider the following distribution on integers $x\geq 1$: ${\bf Prob}(X=x)=(6/\pi^2)x^{-2}$.
+% /Users/seboll/Desktop/IN_MY_MIND/MATHS/ALGORITHMS_AND_TCS/random_matrices.pdf
+\titledquestion{Eigenvalues of random matrices}
+In this problem, we will discuss the computation of eigenvalues of random matrices. Let us start by considering a 2$\times$2 matrix $$H_s=\begin{pmatrix}X_1&X_3\\X_3&X_2\end{pmatrix},$$ where $X_1,X_2\sim\mathcal{N}(0,1)$ and $X_3\sim\mathcal{N}(0,1/2)$. We are interested in finding the density function $p(s)$ of the spacing $s=\lambda_2-\lambda_1$ between its two eigenvalues (where $\lambda_2>\lambda_1)$.
 \begin{parts}
-    \part[4] Show that it is indeed a valid distribution.
-    \part[8] Compute $E[X]$ and $Var(X)$.
-\end{parts}
-\newpage
-
-% https://arxiv.org/pdf/1910.04236.pdf
-\titledquestion{Shannon type inequalities}
-In this problem, we investigate fundamental inequalities that arise in information theory.
-\begin{parts}
-    \part[4] Show that for any three random variables $X_1$, $X_2$, $X_3$, $$H(X_1,X_2)+H(X_1,X_3)\geq H(X_1,X_2,X_3)+H(X_1)$$
-    \part[4] Using (a), Deduce that $$I(X_1;X_2)+I(X_1;X_3)-I(X_2;X_3)\leq H(X_1)$$
-    \part[4] Suppose now the r.v.'s $X_1$---$X_2$---$X_3$ form a Markov chain. Prove that $$I(X_1;X_2)\geq I(X_1;X_3).$$ This result is known as the \textit{Data processing inequality}.
-    \part[5] Suppose we now add another random variable $X_4$ to the chain. Show that $$I(X_1;X_4)+I(X_2;X_3)\geq I(X_1;X_3)+I(X_2;X_4)$$
-\end{parts}
-\newpage
-
-\titledquestion{Generating a chi-squared distribution}
-Let $Z_1,\ldots,Z_n$ be i.i.d. $\sim\mathcal{N}(0,1)$ and define $X=Z_1^2+\ldots+Z_n^2$. We say that a random variable follows a $\chi^2$ distribution with $k$ degrees of freedom if its density function is given by $$f_X(x)=\frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)},$$ where $\Gamma(k)=\int_0^\infty e^{-x}x^{k-1}\,dx$ is the Gamma function.
-\begin{parts}
-    \part[2] Show that $\Gamma(1/2)=\sqrt{\pi}$. \textit{Hint: recall that $\int_\mathbb{R}e^{-x^2}\,dx=\sqrt{\pi}$}.
-    \part[3] Using (a), show that $\Gamma(3/2)=\sqrt{\pi}/2$. \textit{Hint: $\Gamma(k+1)=k\Gamma(k)$}.
-    \part[5] Generalise your previous results to show that $$\Gamma(n/2)=\frac{(n-2)!!}{2^{(n-1)/2}}\sqrt{\pi}.$$\textit{Hint: use induction}.
-    \part[8] Compute the pdf of $Z_1^2$ and its characteristic function $\Phi_{Z_1^2}(\omega)$.
-    \part[2] Deduce using (a) that $Z_1^2$ is $\chi^2(1)$ distributed.
-    \part[6] Show that $Z_1^2+Z_2^2\sim\chi^2(2)$.\textit{Hint: use polar coordinates}.
-    \part[6] Compute the value of $\Phi_X(\omega)$. Conclude that $X\sim\chi^2(n)$.
+    \part[5] Recall that we can find a matrix' eigenvalues by computing the roots of its characteristic polynomial. Knowing this, show that $$\lambda_{1,2}=\frac{1}{2}\left(X_1+X_2\pm\sqrt{(X_1-X_2)^2+4X_3}\right).$$
+    \part[3] Deduce that $$s=\sqrt{(X_1-X_2)^2+4X_3}.$$
+    \part[10] Let $x_1,x_2,x_3$ be the values $X_1,X_2,X_3$ take, respectively. By definition,  we have $$p(s)=\int_{-\infty}^{+\infty}\frac{e^{-\frac{1}{2}x_1^2}}{\sqrt{2\pi}}\frac{e^{-\frac{1}{2}x_2^2}}{\sqrt{2\pi}}\frac{e^{-x_3^2}}{\sqrt{\pi}}\left(s-\sqrt{(x_1-x_2)^2+4x_3}\right)\,dx_1dx_2dx_3.$$
+    We know as a fact that $p(s)$ is a valid pdf. Show that $$p(s)=\frac{s}{2}e^{-s^2/4}.$$ Hint: use a variant of the spherical coordinates by letting $x_1-x_2=r\cos\theta$, $2x_3=r\sin\theta$ and $x_1+x_2=\phi$.
+    \part[10] Define $\overline{p}(s)=\langle s\rangle p\big(\langle s\rangle s\big)$, where $\langle s\rangle=\int_0^\infty sp(s)\,ds$ is the mean level spacing. Upon this rescaling, note that $$\int_0^\infty\overline{p}(s)\,ds=\int_0^\infty s\overline{p}(s)\,ds=1.$$ For the matrix $H_s$ defined earlier, show that $$\overline{p}(s)=\frac{\pi s}{2}e^{-\pi s^2/4}.$$ This function is known as Wigner's surmise and is mainly used to describe the density of level spacings of normalised eigenvalues.
 \end{parts}
 \newpage (this page is intentionally left blank)
 \newpage (this page is intentionally left blank)
 \newpage
-% https://math.stackexchange.com/questions/1110168/proof-of-the-box-muller-method?rq=1
-\titledquestion{Box-Muller method}
-This problem addresses a method of converting two independent uniform random variables to two independent Gaussian random variables. Let $X_1(u)$ and $X_2(u)$ be two independent uniformly distributed random variables such that $$f_{X_1(u)}(z)=f_{X_2(u)}(z).=\begin{cases}1&\text{ if $z\in[0,1]$}\\0&\text{ otherwise.}\end{cases}$$ 
-Let $Y_1(u)=\sqrt{-2\ln(X_1(u))}\cos(2\pi X_2(u))$, and $Y_2(u):=\sqrt{-2\ln(X_1(u))}\sin(2\pi X_2(u))$. The purpose of this problem is to demonstrate that the r.v.'s defined above are independent zero mean and unit variance Gaussians.
+
+\titledquestion{Locality Sensitive Hashing using cosine similarity}
+In this exercise, we investigate the core theory behind the implementation of fast cosine similarity. Formally, we define the cosine similarity between two vectors as follows: let $u$ and $v$ be two vectors in a $k$-dimensional hyperplane. Let $\theta(u,v)$ denote the angle between the two vectors (measured in radians), $\langle u,v\rangle=\sum_i u_iv_i$ their dot product and $||u||_2,||v||_2$ their respective $L2$-norms. The cosine similarity is then given by $$\cossim(u,v)=\cos\theta(u,v)=\frac{\langle u,v\rangle}{||u||_2||v||_2}.$$
 \begin{parts}
-    \part[4] Compute $f_{X_1(u)X_2(u)}(x_1,x_2)$.
-    \part[4] Compute $E[Y_1(u)]$, $E[Y_2(u)]$ and $E[Y_1(u)Y_2(u)]$.
-    \part[4] Let $R(u)=\sqrt{-2\ln(X_1(u))}$. Show that $$f_{R(u)}(r)=re^{-r^2/2},$$ where $r>0$.
-    \part[4] Now, let $\Theta(u):=2\pi X_2(u)$. Compute $f_{\Theta(u)}(\theta)$ and deduce the value of the joint density $f_{R(u),\Theta(u)}(r,\theta)$.
-    \part[8] Finally, using polar coordinates, show that $Y_1(u),Y_2(u)\sim\mathcal{N}(0,1)$ and conclude that they are indeed independent.
+    % https://arxiv.org/pdf/2107.04071.pdf
+    \part[4] Show that $\cossim(u,v)=\cossim(\alpha u,v)=\cossim(u,\alpha v)$ for any $\alpha>0$.
+    \part[4] Recall that the Euclidean distance between two vectors $u$ and $v$ is given as $$d_E(u,v)=\sqrt{\sum_i (u_i-v_i)^2}.$$ Express the Euclidean distance in terms of the cosine similarity.
+    \part[2] Deduce from the previous question that $$\cossim(u,v)=1-\frac{1}{2}d_E^2\big(u/||u||,v/||v||\big).$$
+    \part[6] Suppose we are now given a collection of vectors in a $k$-dimensional vector space $\mathbb{R}^k$. Choose a family of hash functions as follows: generate a spherically symmetric random vector $r$ of unit length from this $k$-dimensional space and define a hash function $h_r$ as $$h_r(u)=\begin{cases}
+        1&\text{ if $r.u\geq 0$}\\0&\text{ otherwise}.
+    \end{cases}$$
+    % https://aclanthology.org/P05-1077.pdf
+    Prove that for two vectors $u$ and $v$, $${\bf Prob}(h_r(u)=h_r(v))=1-\frac{\theta(u,v)}{\pi}.$$
+    \part[2] Deduce that $$\cossim(u,v)=\cos(1-{\bf Prob}(h_r(u)=h_r(v))\pi).$$
 \end{parts}
+\newpage (this page is intentionally left blank)
+\newpage
+
+% https://cs.brown.edu/courses/csci1550/homework/2021/hw0_2021_sol.pdf
+% Problem 1
+\titledquestion{Probabilistic analysis}
+In this problem, we will use an unbiased coin to simulate a biased coin. We are given a random source $B$ that generates a sequence of independent bits $b_1,b_2,\ldots$ such that for each $i$, $Pr(b_i=0)=Pr(b_i=1)=1/2$ (i.e. a sequence of independent unbiased coin flips). Let $X$ denote the outcome of an biased coin flip, i.e. $X$ is a Bernoulli r.v. of parameter $p$ such that $Pr(X=1)=p$ and $Pr(X=0)=1-p$ for some $p\in[0,1]$. We want to generate a random value with the distribution of $X$ using the random source $B$. Furthermore, let $Y_j=\sum_{i=1}^j b_i2^{-j}$. Clearly for each $j$, the r.v. $Y_j$ is uniformly distributed in $\{0,2^{-j},2\cdot 2^{-j},\ldots,1\}$.\par 
+Consider now the following procedure: We generate random values $y_1,y_2,\ldots$ by choosing random bits $b_1,b_2,\ldots$. We stop at the first $k$ such that either any extension of $y_k$ with more random bits is guaranteed to be $\leq p$ - in that case we output $X=1$ - or at the first $k$ such that any extension of $y_k$ is $>p$ - where in that case we output $X=0$.
+\begin{parts}
+    \part[5] Show that the above procedure generates a random variable $X$ with the correct distribution.
+    \part[3] What is the probability that this procedure generates more than $l$ random bits ?
+    \part[6] What is the expected number of bits generated by this procedure and what is the worst case number of bits possible ?
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage
+
+% /Users/seboll/Desktop/IN_MY_MIND/MATHS/METHODES_MATHS/PROBABILITY/MIT18_S997S15_Chapter1.pdf
+% 1.3 Sub-exponential
+\titledquestion{Sub-exponential random variables}
+In high dimensional probability, we say that a random variable $X$ follows a sub-exponential distribution with parameter $\lambda$ (that we write as $X\sim\subE(\lambda)$) if $E[X]=0$ and its moment generating function satisfies $E[e^{sX}]\leq e^{s^2\lambda^2/2}$, for all $|s|\leq 1/\lambda$. In this problem, we will see how to define such random variables and prove a useful lemma that involves their usage.
+\begin{parts}
+    \part[5] Let $X$ be a centered random variable such that ${\bf Prob}(|X|>t)\leq 2e^{-2t/\lambda}$ for some $\lambda>0$. Show that for any positive integer $k\geq 1$, $$E[|X|^k]\leq\lambda^k k!.$$
+    \part[3] Deduce that $$\big(E[|X|^k]\big)^{1/k}\leq 2\lambda k.$$
+    \part[5] Conclude that $X$ is sub-exponentially distributed, i.e. that its MGF satisfies $$E[e^{sX}]\leq e^{2s^2\lambda^2},$$ for all $|s|\leq 1/2\lambda$. Hint: use a Taylor expansion.\par
+    We now recall the definition of a sub-Gaussian random variable. We say that a random variable $Y\in\mathbb{R}$ follows a sub-Gaussian distribution with variance proxy $\sigma^2$ if $E[Y]=0$ and its moment generating function satisfies $$E[e^{sY}]\leq e^{\sigma^2 s^2/2},\,\forall s\in\mathbb{R}.$$ Notice that its definition is close to that of the sub-exponential one.
+    \part[10] Let $Y\sim\subG(\sigma^2)$. Show that the random variable $Z=Y^2-E[Y^2]$ is sub-exponential with parameter $16\sigma^2$. Hint: to prove this, you will have to use Jensen's inequality along with the following lemma:
+    \begin{lemma}
+        Let $X$ be a random variable such that ${\bf Prob}(|X|>t)\leq 2e^{-t^2/2\sigma^2}$. Then, for any positive integer $k\geq 1$, $E[|X|^k]\leq (2\sigma^2)^{k/2}k\Gamma(k/2)$ where $\Gamma(t)=\int_0^\infty x^{t-1}e^{-x}\,dx$ is the Gamma function defined for $t>0$.
+    \end{lemma}
+\end{parts}
+\newpage (this page is intentionally left blank)
 \newpage (this page is intentionally left blank)
 \newpage
 

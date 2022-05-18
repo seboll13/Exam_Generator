@@ -1,0 +1,57 @@
+% https://math.stackexchange.com/questions/3563395/a-random-sphere-containing-the-center-of-the-unit-cube
+\titledquestion{Geometric probabilities}
+In this problem, we will learn two different geometric scenarios that help to better visualise some probabilities.
+\begin{parts}
+    \part[5] Suppose that we pick a point $X$ uniformly at random in a circle of radius $r$. Compute the probability that the point is closer to the center of the circle than it is to its extremity.
+    \part[15] Suppose now that we pick a point $Y$ uniformly at random in the unit cube. We then construct a sphere centered at $Y$ of radius corresponding to the distance between its center and the closest side of the cube. Compute the probability that the center of the cube is included in the sphere. For full credit, you must show details of all your calculations.
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage
+
+\titledquestion{Generating a chi-squared distribution}
+Let $Z_1,\ldots,Z_n$ be i.i.d. $\sim\mathcal{N}(0,1)$ and define $X=Z_1^2+\ldots+Z_n^2$. We say that a random variable follows a $\chi^2$ distribution with $k$ degrees of freedom if its density function is given by $$f_X(x)=\frac{x^{k/2-1}e^{-x/2}}{2^{k/2}\Gamma(k/2)},$$ where $\Gamma(k)=\int_0^\infty e^{-x}x^{k-1}\,dx$ is the Gamma function.
+\begin{parts}
+    \part[2] Show that $\Gamma(1/2)=\sqrt{\pi}$. \textit{Hint: recall that $\int_\mathbb{R}e^{-x^2}\,dx=\sqrt{\pi}$}.
+    \part[3] Using (a), show that $\Gamma(3/2)=\sqrt{\pi}/2$. \textit{Hint: $\Gamma(k+1)=k\Gamma(k)$}.
+    \part[5] Generalise your previous results to show that $$\Gamma(n/2)=\frac{(n-2)!!}{2^{(n-1)/2}}\sqrt{\pi}.$$\textit{Hint: use induction}.
+    \part[8] Compute the pdf of $Z_1^2$ and its characteristic function $\Phi_{Z_1^2}(\omega)$.
+    \part[2] Deduce using (a) that $Z_1^2$ is $\chi^2(1)$ distributed.
+    \part[6] Show that $Z_1^2+Z_2^2\sim\chi^2(2)$.\textit{Hint: use polar coordinates}.
+    \part[6] Compute the value of $\Phi_X(\omega)$. Conclude that $X\sim\chi^2(n)$.
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage (this page is intentionally left blank)
+\newpage
+
+% https://inst.eecs.berkeley.edu/~cs174/fa10/sol2.pdf
+% Ex 2
+\titledquestion{Work on geometric distributions}
+Let $X\sim Geom(p)$ and $Y\sim Geom(q)$ be independent random variables that follow a Geometric distribution of respective parameters $p$ and $q$.
+\begin{parts}
+    \part[4] Show that $${\bf Prob}[X=Y]=\frac{pq}{p+q-pq}$$ \textit{Hint: the following formula may be useful}:
+    \begin{equation}
+        {\bf Prob}[X\geq i]=\sum_{n=i}^\infty (1-p)^{n-1}p=(1-p)^{i-1}
+        \label{eqn:exp_geom}
+    \end{equation}
+    \part[6] Compute ${\bf Prob}[\min(X,Y)=k]$ \textit{Hint: split the probability into two disjoint events $\{X=k,Y\geq k\}$ and $\{X>k,Y=k\}$ and use (\ref{eqn:exp_geom})}.
+    \part[4] Show that $E[\max(X,Y)]+E[\min(X,Y)]=E[X]+E[Y]$ for any two random variables $X$ and $Y$.
+    \part[4] Use your previous results to compute the values of $E[\max(X,Y)]$ and $E[\min(X,Y)]$.
+    \part[6] What is $E[X|X\leq Y]$ ? What can you conclude ?
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage
+
+% https://math.stackexchange.com/questions/1110168/proof-of-the-box-muller-method?rq=1
+\titledquestion{Box-Muller method}
+This problem addresses a method of converting two independent uniform random variables to two independent Gaussian random variables. Let $X_1(u)$ and $X_2(u)$ be two independent uniformly distributed random variables such that $$f_{X_1(u)}(z)=f_{X_2(u)}(z).=\begin{cases}1&\text{ if $z\in[0,1]$}\\0&\text{ otherwise.}\end{cases}$$ 
+Let $Y_1(u)=\sqrt{-2\ln(X_1(u))}\cos(2\pi X_2(u))$, and $Y_2(u):=\sqrt{-2\ln(X_1(u))}\sin(2\pi X_2(u))$. The purpose of this problem is to demonstrate that the r.v.'s defined above are independent zero mean and unit variance Gaussians.
+\begin{parts}
+    \part[4] Compute $f_{X_1(u)X_2(u)}(x_1,x_2)$.
+    \part[4] Compute $E[Y_1(u)]$, $E[Y_2(u)]$ and $E[Y_1(u)Y_2(u)]$.
+    \part[4] Let $R(u)=\sqrt{-2\ln(X_1(u))}$. Show that $$f_{R(u)}(r)=re^{-r^2/2},$$ where $r>0$.
+    \part[4] Now, let $\Theta(u):=2\pi X_2(u)$. Compute $f_{\Theta(u)}(\theta)$ and deduce the value of the joint density $f_{R(u),\Theta(u)}(r,\theta)$.
+    \part[8] Finally, using polar coordinates, show that $Y_1(u),Y_2(u)\sim\mathcal{N}(0,1)$ and conclude that they are indeed independent.
+\end{parts}
+\newpage (this page is intentionally left blank)
+\newpage
+
