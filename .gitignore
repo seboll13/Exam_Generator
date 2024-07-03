@@ -1,8 +1,11 @@
 # Useless files or folders
 .DS_Store
 .vscode/*
+.ruff_cache/
+py311_*
+__pycache__/
+Templates_HES/
 
 # Personal assets
-Assets/all-questions_copy.tex
-Assets/midterm*.tex
-Assets/final*.tex
+Assets/
+Exams/
